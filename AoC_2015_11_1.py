@@ -1,8 +1,6 @@
 # Passwords must include one increasing straight of at least three letters, like abc, bcd, cde, and so on, up to xyz. They cannot skip letters; abd doesn't count.
 # Passwords may not contain the letters i, o, or l, as these letters can be mistaken for other characters and are therefore confusing.
 # Passwords must contain at least two different, non-overlapping pairs of letters, like aa, bb, or zz.
-next_letter = {'a':'b','b':'c','c':'d','d':'e','e':'f','f':'g','g':'h','h':'j','j':'k','k':'m','m':'n','n':'p','p':'q','q':'r','r':'s','s':'t','t':'u','u':'v','v':'w','w':'x','x':'y','y':'z','z':'a'}
-
 def next_char(char):
     return chr(ord(char) + 1)
 
@@ -11,7 +9,7 @@ def next_passw(passw):
     l = 0
     while rev[l] == 'z':
         l +=1
-    res = next_letter['z'] * l + next_letter[rev[l]] + rev[l+1:len(rev)]
+    res = 'a' * l + next_char(rev[l]) + rev[l+1:len(rev)]
     return res[::-1]
 
 def rule1(passw):
@@ -20,6 +18,14 @@ def rule1(passw):
         if passw[l+1] == next_char(passw[l]) and passw[l+2] == next_char(passw[l+1]):
             heads.add(l)
     return bool(heads)
+
+def rule2(passw):
+    passed = True
+    for l in range(len(passw)):
+        passed = passed and passw[l] != 'i' and passw[l] != 'o'  and passw[l] != 'l'
+        if not passed:
+            break
+    return passed
 
 def rule3(passw):
     heads = set()
@@ -37,11 +43,9 @@ def next_good_passw(passw):
     tst = passw
     while not found:
         tst = next_passw(tst)
-        found = rule1(tst) and rule3(tst)
+        found = rule1(tst) and rule2(tst) and rule3(tst)
     return tst
 
-
-print(next_good_passw('abcdefgh'))
 print(next_good_passw('vzbxkghb'))
 print(next_good_passw(next_good_passw('vzbxkghb')))
 
