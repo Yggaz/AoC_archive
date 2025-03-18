@@ -12,16 +12,12 @@ for ln in deer_text:
     cycles = ticks // cycle
     time_left = ticks % cycle
     if time_left > run:
-        print(lin[0],': ', time_left, ' -> ', run)
         time_left = run
-    else:
-        print(lin[0], ': ', time_left)
     dist_left = time_left * speed
     total_dist = dist * cycles + dist_left
-    print(lin[0], speed, run, rest, dist, cycle, cycles, time_left, total_dist)
     if total_dist > max_dist:
         max_dist = total_dist
         leader = lin[0]
         print('Current leader: ', leader, ':', total_dist)
-print('Winner: ', leader, ':', total_dist)
+print('Winner: ', leader, ':', max_dist)
 
