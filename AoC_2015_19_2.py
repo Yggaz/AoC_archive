@@ -1,6 +1,4 @@
 from time import time
-
-
 text = open('input_2015_19.txt', 'r', encoding='utf-8').readlines()
 replacements = list()
 res = set()
