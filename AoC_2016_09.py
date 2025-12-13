@@ -1,6 +1,3 @@
-from functools import cache
-
-@cache
 def decompress(s:str)->int:
     ob = s.find('(')
     if ob < 0:
@@ -37,4 +34,4 @@ res1 = len(res_line)
 res2 = decompress(data[0])
 print('Part 1 answer:', res1)
 print('Part 2 answer:', res2)
-print(decompress.cache_info())
+#print(decompress.cache_info())
